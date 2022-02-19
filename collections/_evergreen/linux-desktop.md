@@ -41,7 +41,7 @@ description: |
 
 ## GNU/Linux
 
-It is often believed that [open source](https://en.wikipedia.org/wiki/Open-source_software) software is inherently secure because there is the expectation that verification occurs regularly. In reality it does depend on a number of factors, such as project activity, developer experience, level of rigour applied to [code reviews](https://en.wikipedia.org/wiki/Code_review) and how often attention is given to specific parts of the [codebase](https://en.wikipedia.org/wiki/Codebase) that may go untouched for years.
+It is often believed that [open source](https://en.wikipedia.org/wiki/Open-source_software) software is inherently secure because there is the expectation that verification occurs regularly. In reality, it does depend on a number of factors, such as project activity, developer experience, level of rigour applied to [code reviews](https://en.wikipedia.org/wiki/Code_review) and how often attention is given to specific parts of the [codebase](https://en.wikipedia.org/wiki/Codebase) that may go untouched for years.
 
 In the case of desktop GNU/Linux distributions, they often come with several security deficiencies when compared to their proprietary counterparts. These include:
 
@@ -112,7 +112,7 @@ For advanced users, we only recommend Arch Linux, not any of its derivatives. In
 ##### Linux-libre kernel and "Libre" distributions
 We strongly recommend **against** using the Linux-libre kernel, since it [removes security mitigations](https://www.phoronix.com/scan.php?page=news_item&px=GNU-Linux-Libre-5.7-Released) and [surpresses kernel warnings about vulnerable microcode](https://news.ycombinator.com/item?id=29674846) for ideological reasons.
 
-We also recommend **against** using "Libre" distributions that utilize the Linux-libre kernel or follow a similar philosophy (not shipping updated firmware with security fixes because they are proprietary) like GUIX.
+If you are using a "Libre" distribution like [GUIX](https://guix.gnu.org/), we highly recommend that you add the [Nonguix](https://gitlab.com/nonguix/nonguix) repository, replace the Linux-libre with the mainline kernel and install all available microcode and firmware updates.
 
 ## Things to consider when installing your Linux distribution
 
