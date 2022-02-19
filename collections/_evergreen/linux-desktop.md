@@ -45,15 +45,15 @@ It is often believed that [open source](https://en.wikipedia.org/wiki/Open-sourc
 
 In the case of desktop GNU/Linux distributions, they often come with several security deficiencies when compared to their proprietary counterparts. These include:
 
- * The lack of a verified boot chain, unlike Apple's [T2 Security Chip](https://support.apple.com/guide/security/startup-security-utility-secc7b34e5b5/web) (with [Secure Enclave](https://support.apple.com/guide/security/secure-enclave-sec59b0b31ff/1/web/1)) or Android's [Verified Boot](https://source.android.com/security/verifiedboot). These features and hardware technologies can all all help prevent persistant tampering by malware or [evil maid attacks](https://en.wikipedia.org/wiki/Evil_Maid_attack).
- * The lack of a strong sandboxing solution such as that found in [MacOS](https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AboutAppSandbox/AboutAppSandbox.html), [ChromeOS](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/sandboxing.md), [Android](https://source.android.com/security/app-sandbox). Commonly used Linux sandboxing solutions such as [Flatpak](https://docs.flatpak.org/en/latest/sandbox-permissions.html) and [Firejail](https://firejail.wordpress.com/) still have a long way to go.
+ * The lack of a verified boot chain, unlike Apple's [Secure Boot](https://support.apple.com/guide/security/startup-security-utility-secc7b34e5b5/web) (with [Secure Enclave](https://support.apple.com/guide/security/secure-enclave-sec59b0b31ff/1/web/1)) or Android's [Verified Boot](https://source.android.com/security/verifiedboot). These features and hardware technologies can all all help prevent persistant tampering by malware or [evil maid attacks](https://en.wikipedia.org/wiki/Evil_Maid_attack).
+ * The lack of a strong sandboxing solution such as that found in [MacOS](https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AboutAppSandbox/AboutAppSandbox.html), [ChromeOS](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/sandboxing.md), and [Android](https://source.android.com/security/app-sandbox). Commonly used Linux sandboxing solutions such as [Flatpak](https://docs.flatpak.org/en/latest/sandbox-permissions.html) and [Firejail](https://firejail.wordpress.com/) still have a long way to go.
  * The lack of strong [exploit mitigations](https://madaidans-insecurities.github.io/linux.html#exploit-mitigations).
 
 Despite of these drawbacks, desktop GNU/Linux distributions are great if you want to 
 
- * Avoid telemetry that often comes with proprietary operating systems
- * Maintain [software freedom](https://www.gnu.org/philosophy/free-sw.en.html#four-freedoms)
- * Have purpose built systems such as [Whonix](https://www.whonix.org) or [Tails](https://tails.boum.org/)
+ * Avoid telemetry that often comes with proprietary operating systems.
+ * Maintain [software freedom](https://www.gnu.org/philosophy/free-sw.en.html#four-freedoms).
+ * Have purpose built systems such as [Whonix](https://www.whonix.org) or [Tails](https://tails.boum.org/).
 
 For our purposes, the rest of this page will use the term "Linux" to describe desktop GNU/Linux distributions. This does not include other operating systems which also use the Linux kernel such as ChromeOS, Android, or Qubes OS.
 
