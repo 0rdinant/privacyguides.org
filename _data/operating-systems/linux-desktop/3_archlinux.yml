@@ -2,9 +2,9 @@ title: Arch Linux
 type: Recommendation
 logo: /assets/img/linux-desktop/archlinux.svg
 description: |
-  **Arch Linux** is a lightweight, do-it-yourself (DIY) distribution meaning that you only get what you install, for more information see their [FAQ](https://wiki.archlinux.org/title/Frequently_asked_questions).
+  **Arch Linux** is a lightweight, do-it-yourself (DIY) distribution meaning that you only get what you install. For more information see their [FAQ](https://wiki.archlinux.org/title/Frequently_asked_questions).
 
-  Arch Linux has a rolling release cycle. There is no fixed release schedule, and packages are updated very frequently.
+  Arch Linux has a rolling release cycle. There is no fixed release schedule and packages are updated very frequently.
 
   Being a DIY distribution, the user is expected to setup and maintain their system. Since September 2020, Arch has an [official installer](https://wiki.archlinux.org/title/Archinstall) to make the installation process a little easier.
 

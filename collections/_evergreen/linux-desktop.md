@@ -28,7 +28,7 @@ description: |
 
 {% endfor %}
 
-## Anonimity focused distributions
+## Anonymity focused distributions
 
 {% for item_hash in site.data.operating-systems.linux-desktop-tor %}
 {% assign item = item_hash[1] %}
@@ -41,30 +41,28 @@ description: |
 
 ## GNU/Linux
 
-It is often believed that [open source](https://en.wikipedia.org/wiki/Open-source_software) software is inherently secure because there is the expectation that verification occurs regularly. In reality, it does depend on a number of factors, such as project activity, developer experience, level of rigour applied to [code reviews](https://en.wikipedia.org/wiki/Code_review) and how often attention is given to specific parts of the [codebase](https://en.wikipedia.org/wiki/Codebase) that may go untouched for years.
+It is often believed that [open source](https://en.wikipedia.org/wiki/Open-source_software) software is inherently secure because the source code is available. There is an expectation that community verification occurs regularly; however, this isn't always [the case](https://seirdy.one/2022/02/02/floss-security.html). It does depend on a number of factors, such as project activity, developer experience, level of rigour applied to [code reviews](https://en.wikipedia.org/wiki/Code_review) and how often attention is given to specific parts of the [codebase](https://en.wikipedia.org/wiki/Codebase) that may go untouched for years.
 
-In the case of desktop GNU/Linux distributions, they often come with several security deficiencies when compared to their proprietary counterparts. These include:
+At the moment desktop GNU/Linux does have some areas that could be better improved when compared to their proprietary counterparts e.g:
 
- * The lack of a verified boot chain, unlike Apple's [Secure Boot](https://support.apple.com/guide/security/startup-security-utility-secc7b34e5b5/web) (with [Secure Enclave](https://support.apple.com/guide/security/secure-enclave-sec59b0b31ff/1/web/1)) or Android's [Verified Boot](https://source.android.com/security/verifiedboot). These features and hardware technologies can all all help prevent persistant tampering by malware or [evil maid attacks](https://en.wikipedia.org/wiki/Evil_Maid_attack).
- * The lack of a strong sandboxing solution such as that found in [MacOS](https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AboutAppSandbox/AboutAppSandbox.html), [ChromeOS](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/sandboxing.md), and [Android](https://source.android.com/security/app-sandbox). Commonly used Linux sandboxing solutions such as [Flatpak](https://docs.flatpak.org/en/latest/sandbox-permissions.html) and [Firejail](https://firejail.wordpress.com/) still have a long way to go.
- * The lack of strong [exploit mitigations](https://madaidans-insecurities.github.io/linux.html#exploit-mitigations).
+ * A verified boot chain, unlike Apple's [Secure Boot](https://support.apple.com/guide/security/startup-security-utility-secc7b34e5b5/web) (with [Secure Enclave](https://support.apple.com/guide/security/secure-enclave-sec59b0b31ff/1/web/1)), Android's [Verified Boot](https://source.android.com/security/verifiedboot) or Microsoft Windows's [boot process](https://docs.microsoft.com/en-us/windows/security/information-protection/secure-the-windows-10-boot-process) with [TPM](https://docs.microsoft.com/en-us/windows/security/information-protection/tpm/how-windows-uses-the-tpm). These features and hardware technologies can all help prevent persistant tampering by malware or [evil maid attacks](https://en.wikipedia.org/wiki/Evil_Maid_attack)
+ * Strong sandboxing solution such as that found in [MacOS](https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AboutAppSandbox/AboutAppSandbox.html), [ChromeOS](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/sandboxing.md), and [Android](https://source.android.com/security/app-sandbox). Commonly used Linux sandboxing solutions such as [Flatpak](https://docs.flatpak.org/en/latest/sandbox-permissions.html) and [Firejail](https://firejail.wordpress.com/) still have a long way to go
+ * Strong [exploit mitigations](https://madaidans-insecurities.github.io/linux.html#exploit-mitigations)
 
-Despite of these drawbacks, desktop GNU/Linux distributions are great if you want to 
+Despite of these drawbacks, desktop GNU/Linux distributions are great if you want to:
 
- * Avoid telemetry that often comes with proprietary operating systems.
- * Maintain [software freedom](https://www.gnu.org/philosophy/free-sw.en.html#four-freedoms).
- * Have purpose built systems such as [Whonix](https://www.whonix.org) or [Tails](https://tails.boum.org/).
+ * Avoid telemetry that often comes with proprietary operating systems
+ * Maintain [software freedom](https://www.gnu.org/philosophy/free-sw.en.html#four-freedoms)
+ * Have purpose built systems such as [Whonix](https://www.whonix.org) or [Tails](https://tails.boum.org/)
 
-For our purposes, the rest of this page will use the term "Linux" to describe desktop GNU/Linux distributions. This does not include other operating systems which also use the Linux kernel such as ChromeOS, Android, or Qubes OS.
+This page uses the term "Linux" to describe desktop GNU/Linux distributions. Other operating systems which also use the Linux kernel such as ChromeOS, Android, and Qubes OS are not discussed here.
 
-## Choosing your distribution
+## Release cycle
+We highly recommend that you choose distributions which stay close to the stable upstream software releases. This is because frozen release cycle distributions often don't update package versions and fall behind on security updates.
 
-##### Release cycle
-We highly recommend that you choose a distributions which stay close to upstream like Fedora, openSUSE Tumbleweed, or Arch. Avoid distributions with frozen packages, as they are often quite behind on security updates.
+For frozen distributions package maintainers are expected to backport patches to fix vulnerabilities (Debian is one such [example](https://www.debian.org/security/faq#handling)) rather than bump the software to the "next version" released by the upstream developer. Some security fixes [do not](https://arxiv.org/abs/2105.14565) recieve a CVE (particularly less popular software) at all and therefore do not make it into the distribution with this patching model. As a result minor security fixes are sometimes held back until the next major release.
 
-For example, Debian famously fell behind on Firefox-ESR updates for [2 months](https://tracker.debian.org/pkg/firefox-esr), in one of which their version (78) was deemed end of life by Mozilla. Notably, Debian [only](https://www.debian.org/security/faq#handling) backports security fixes that have recieved a [CVE](https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures). A lot of security fixes [do not](https://arxiv.org/abs/2105.14565) recieve a CVE at all, and do not make it to an LTS distribution with this patching model. Sometimes, minor security fixes are also held back until the next release of Debian.
-
-Fundamentally, holding packages back and applying a bunch of backports just does not work that well. [Richard Brown](https://rootco.de) has a great presentation about this:
+We don't believe holding packages back and applying interim patches is a good idea, as it diverges from the way the developer might have intended the software to work. [Richard Brown](https://rootco.de) has a great presentation about this:
 
 <iframe
   width="731" height="411"
@@ -75,25 +73,15 @@ Fundamentally, holding packages back and applying a bunch of backports just does
   allowfullscreen>
 </iframe>
 
-##### Distributions with atomic/transactional updates
-If you are not comfortable with fast moving distributions, consider using one with an atomic or transactional update system.
+## Traditional vs Atomic updates
 
-On a system with atomic update, and update is either applied fully or completely diregarded. An update cannot suddenly fail and be applied half way through. Typically, a system with atomic update will provide an easy way to roll the system back to a previous state should a bug occur after an update as well.
+The most common system that GNU/Linux distributions use for updating is the traditional method, where updates are applied sequentially as packages of files. Traditional updates such as those used in Fedora, Archlinux, and Debian based distributions can be less reliable if an error occurs while updating. <img style="width: 500px; float: right; padding: 15px 5px 10px 20px;" src="/assets/img/linux-desktop/updates.gif" alt="Image showing traditional vs Atomic updates"/>
 
-On a system with transactional update, a system snapshot is made right before and after an update is applied. If an update fail half way through, or if you encouter some bugs after the update, rolling back is very easy as well.
+With an atomic updating distribution updates are either applied fully or not at all; typically transactional update systems are also atomic.
 
-[Adam Samalik](https://blog.samalik.com/) has a great demonstration of how rpm-ostree and atomic updates work:
+A transactional update system, provides a snapshot that is made right before and after an update is applied. If an update fails part of the way through (perhaps because of a power failure), rolling the update back to the "last known good state" is easy.
 
-<iframe
-  width="731" height="411"
-  src="https://www.youtube.com/embed/-hpV5l-gJnQ"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen>
-</iframe>
-
-With these distributions, you essentially can have your cake and eat it too. You can update fast, stay close to upstream and get most of the security fixes, and simply rollback and wait out whenever something goes wrong.
+For fast-moving distributions like [Silverblue](https://www.youtube.com/watch?v=-hpV5l-gJnQ), Tumbleweed and NixOS reliability can be achieved with this model.
 
 ##### "Security-focused" distributions
 Unfortunately, a quick search for "the most secure Linux distribution" will often give results like Kali Linux, Black Arch, Parrot OS. These distributions penetration testing distributions - they are meant to be used as an attacker machine, not as a tool to protect the user. Avoid using these distributions as your daily driver.
@@ -175,7 +163,7 @@ However, problems like hard-coded access to some kernel interfaces like `/sys` a
 Firejail is another common sandboxing technique. It is, however, a giant SUID binary and has a large attack surface. In short, Firejail makes the system safer from processes that are confined by it, but less safe from processes running outside of it. In general, the usage of Firejail is not recommended. More information on this can be found in Madaidan's [article](https://madaidans-insecurities.github.io/linux.html#firejail).
 
 ##### gVisor
-Most container based solutions are not the ideal approach for app sandboxing, as they typically share the same kernel as the host for performance reasons. Vulnerabilities in the host's kernel could leak to container breakouts and sandbox bypasses. 
+Most container based solutions are not the ideal approach for app sandboxing, as they typically share the same kernel as the host for performance reasons. Vulnerabilities in the host's kernel could leak to container breakouts and sandbox bypasses.
 
 If you are using Docker, it is highly recommended that you use the [gVisor](https://gvisor.dev) runtime which implements a pseudo kernel for each application container and limit their direct access to the host's kernel.
 
