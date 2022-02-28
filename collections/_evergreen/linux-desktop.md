@@ -57,7 +57,7 @@ Despite of these drawbacks, desktop GNU/Linux distributions are great if you wan
 
 This page uses the term "Linux" to describe desktop GNU/Linux distributions. Other operating systems which also use the Linux kernel such as ChromeOS, Android, and Qubes OS are not discussed here.
 
-## Release cycle
+### Release cycle
 We highly recommend that you choose distributions which stay close to the stable upstream software releases. This is because frozen release cycle distributions often don't update package versions and fall behind on security updates.
 
 For frozen distributions, package maintainers are expected to backport patches to fix vulnerabilities (Debian is one such [example](https://www.debian.org/security/faq#handling)) rather than bump the software to the "next version" released by the upstream developer. Some security fixes [do not](https://arxiv.org/abs/2105.14565) recieve a CVE (particularly less popular software) at all and therefore do not make it into the distribution with this patching model. As a result minor security fixes are sometimes held back until the next major release.
@@ -73,7 +73,7 @@ We don't believe holding packages back and applying interim patches is a good id
   allowfullscreen>
 </iframe>
 
-## Traditional vs Atomic updates
+### Traditional vs Atomic updates
 
 The most common system that GNU/Linux distributions use for updating is the traditional method, where updates are applied sequentially as packages of files. Traditional updates such as those used in Fedora, Archlinux, and Debian based distributions can be less reliable if an error occurs while updating. <img style="width: 500px; float: right; padding: 15px 5px 10px 20px;" src="/assets/img/linux-desktop/updates.gif" alt="Image showing traditional vs Atomic updates"/>
 
@@ -84,20 +84,22 @@ A transactional update system, provides a snapshot that is made right before and
 For fast-moving distributions like [Silverblue](https://www.youtube.com/watch?v=-hpV5l-gJnQ), Tumbleweed and NixOS reliability can be achieved with this model.
 
 ### "Security-focused" distributions
-Unfortunately, a quick search for "the most secure Linux distribution" will often give results like Kali Linux, Black Arch, and Parrot OS. These distributions are penetration testing distributions - they are meant to be used as an attacker machine, not as a tool to protect the user. Avoid using these distributions as your daily driver.
+There is often some confusion about "security-focused" distributions and "pentesting" distributions. A quick search for "the most secure Linux distribution" will often give results like Kali Linux, Black Arch, and Parrot OS.  These distributions are offensive penetration testing distributions, that bundle tools for testing other systems. They don't include any "extra security" or defensive mitigations intended for regular use.
 
-##### Arch-based distributions
+### Arch-based distributions
 
-Arch based systems are not recommended for new users, regardless of the distribution. Arch does not have an update mechanism for the software stack using pacman and the user is expected to maintain their own system, swapping out components of the stack when they become obsolete.
+Arch based distributions are not recommended for new users, regardless of the distribution. Arch does not have an distribution update mechanism for the underlying software stack. As a result the user of the system must stay aware with current trends and adopt technologies as they supersede older best practices.
 
-The user is also expected to have sufficient Linux knowledge to properly set up security for their system such as enabling a mandatory access control system, doing firewalling, setting up kernel module blacklists, hardening boot parameters and sysctl, and so on. Simply getting the system installed is not enough.
+The user is also expected to have sufficient Linux knowledge to properly set up security for their system such as adopting a [mandatory access control](https://en.wikipedia.org/wiki/Mandatory_access_control) system, writing firewall rules, setting up [kernel module](https://en.wikipedia.org/wiki/Loadable_kernel_module#Security) blacklists, hardening boot parameters, manipulating [sysctl](https://en.wikipedia.org/wiki/Sysctl) parameters and knowing what components they need such as [Polkit](https://en.wikipedia.org/wiki/Polkit).
 
-For advanced users, we only recommend Arch Linux, not any of its derivatives. In fact, 2 very popular Arch derivatives are not so great:
+Any user using the [AUR](https://wiki.archlinux.org/title/Arch_User_Repository), **must** be comfortable in auditing PKGBUILDs that they install from that service. AUR packages are user-produced content and are not vetted in any way and therefore are vulnerable to software supply chain attacks, which has in fact happened [in the past](https://www.bleepingcomputer.com/news/security/malware-found-in-arch-linux-aur-package-repository/). AUR should always be used sparingly and often there is a lot of bad advice on various pages which direct users to blindly use [AUR helpers](https://wiki.archlinux.org/title/AUR_helpers) without sufficient warning.
 
-  * Manjaro: They hold packages back for 2 weeks to make sure that their own changes don't break, not to make sure that upstream is stable. AUR packages on the other hand often expect the latest and greatest packages on Arch's own repository, which sometimes lead to dependency mismatch.
-  * Garuda: They use [Chaotic-AUR](https://aur.chaotic.cx/) which automatically and blindly compiles packages from the AUR. There is no verification process to make sure that the AUR packages themselve don't turn malicious.
+For advanced users, we only recommend Arch Linux, not any of its derivatives. We recommend against these two Arch derivatives:
 
-##### Linux-libre kernel and "Libre" distributions
+ * **Manjaro**: This distribution holds packages back for 2 weeks to make sure that their own changes don't break, not to make sure that upstream is stable. When AUR packages are used, they are often built against the latest [libraries](https://en.wikipedia.org/wiki/Library_(computing)) from Arch's repositories.
+ * **Garuda**: They use [Chaotic-AUR](https://aur.chaotic.cx/) which automatically and blindly compiles packages from the AUR. There is no verification process to make sure that the AUR packages don't suffer from supply chain attacks.
+
+### Linux-libre kernel and "Libre" distributions
 We strongly recommend **against** using the Linux-libre kernel, since it [removes security mitigations](https://www.phoronix.com/scan.php?page=news_item&px=GNU-Linux-Libre-5.7-Released) and [surpresses kernel warnings about vulnerable microcode](https://news.ycombinator.com/item?id=29674846) for ideological reasons.
 
 If you are using a "Libre" distribution like [GUIX](https://guix.gnu.org/), we highly recommend that you add the [Nonguix](https://gitlab.com/nonguix/nonguix) repository, replace the Linux-libre with the mainline kernel, and install all available microcode and firmware updates.
