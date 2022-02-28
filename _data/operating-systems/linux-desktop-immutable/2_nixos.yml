@@ -6,7 +6,7 @@ description: |
 
   NixOS's package manager keeps every version of every package in a different folder in the **Nix store**. Due to this you can have different versions of the same package installed on your system. After the package contents have been written to the folder, the folder is made read-only.
 
-  NixOS also provides atomic updates. First it downloads (or builds) the packages and files for the new system generation and then switches to it. Switching to a new generation can be done in different ways (you can tell NixOS to activate it after reboot or you can switch to it at runtime). You can also *test* the new generation by switching to it at runtime, but not setting it as the current system generation. If something in the update process breaks, you can just reboot and automatically and return to a working version of your system.
+  NixOS also provides atomic updates; First it downloads (or builds) the packages and files for the new system generation and then switches to it. Switching to a new generation can be done in different ways; (you can tell NixOS to activate it after reboot or you can switch to it at runtime). You can also *test* the new generation by switching to it at runtime, but not setting it as the current system generation. If something in the update process breaks, you can just reboot and automatically and return to a working version of your system.
 
   Nix the package manager uses a purely functional language - which is also called Nix - to define packages. Because of this [Nixpkgs](https://github.com/nixos/nixpkgs) (the main source of packages) is contained in a single Github repository. You can also define your own packages in the same language and then easily include them in your config.
 
