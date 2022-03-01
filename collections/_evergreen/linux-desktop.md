@@ -75,7 +75,7 @@ We don't believe holding packages back and applying interim patches is a good id
 
 ### Traditional vs Atomic updates
 
-The most common system that GNU/Linux distributions use for updating is the traditional method, where updates are applied sequentially as packages of files. Traditional updates such as those used in Fedora, Archlinux, and Debian based distributions can be less reliable if an error occurs while updating. <picture><img alt="iOS Garbage Bin icon" src="/assets/img/linux-desktop/updates.gif" style="width: 500px; float: right; padding: 15px 5px 10px 20px;"</picture>
+The most common system that GNU/Linux distributions use for updating is the traditional method, where updates are applied sequentially as packages of files. Traditional updates such as those used in Fedora, Archlinux, and Debian based distributions can be less reliable if an error occurs while updating. <img style="width: 500px; float: right; padding: 15px 5px 10px 20px;" src="/assets/img/linux-desktop/updates.gif" alt="Image showing traditional vs Atomic updates"/>
 
 With an atomic updating distribution updates are either applied fully or not at all; typically transactional update systems are also atomic.
 
