@@ -75,11 +75,11 @@ We don't believe holding packages back and applying interim patches is a good id
 
 ### Traditional vs Atomic updates
 
-The most common system that GNU/Linux distributions use for updating is the traditional method, where updates are applied sequentially as packages of files. Traditional updates such as those used in Fedora, Archlinux, and Debian based distributions can be less reliable if an error occurs while updating. <img style="width: 500px; float: right; padding: 15px 5px 10px 20px;" src="/assets/img/linux-desktop/updates.gif" alt="Image showing traditional vs Atomic updates"/>
+The most common method that Linux distributions use for updating is the traditional method, where updates are applied sequentially as packages of files. Traditional updates such as those used in Fedora, Archlinux, and Debian based distributions can be less reliable if an error occurs while updating. <img style="width: 500px; float: right; padding: 15px 5px 10px 20px;" src="/assets/img/linux-desktop/updates.gif" alt="Image showing traditional vs Atomic updates"/>
 
-With an atomic updating distribution updates are either applied fully or not at all; typically transactional update systems are also atomic.
+Atomic updating distributions apply updates in full or not at all. Typically transactional update systems are also atomic.
 
-A transactional update system, provides a snapshot that is made right before and after an update is applied. If an update fails part of the way through (perhaps because of a power failure), rolling the update back to the "last known good state" is easy.
+A transactional update system, creates a snapshot that is made before and after an update is applied. If an update fails part of the way through (perhaps because of a power failure), rolling the update back to the "last known good state" is easy.
 
 For fast-moving distributions like [Silverblue](https://www.youtube.com/watch?v=-hpV5l-gJnQ), Tumbleweed and NixOS reliability can be achieved with this model.
 
@@ -88,13 +88,13 @@ There is often some confusion about "security-focused" distributions and "pentes
 
 ### Arch-based distributions
 
-Arch based distributions are not recommended for new users, regardless of the distribution. Arch does not have an distribution update mechanism for the underlying software stack. As a result the user of the system must stay aware with current trends and adopt technologies as they supersede older best practices.
+Arch based distributions are not recommended for new users, regardless of the distribution. Arch does not have an distribution update mechanism for the underlying software stack. As a result the user of the system must stay aware with current trends and adopt technologies as they supersede older practices.
 
-The user is also expected to have sufficient Linux knowledge to properly set up security for their system such as adopting a [mandatory access control](https://en.wikipedia.org/wiki/Mandatory_access_control) system, writing firewall rules, setting up [kernel module](https://en.wikipedia.org/wiki/Loadable_kernel_module#Security) blacklists, hardening boot parameters, manipulating [sysctl](https://en.wikipedia.org/wiki/Sysctl) parameters and knowing what components they need such as [Polkit](https://en.wikipedia.org/wiki/Polkit).
+For a secure system, the user is also expected to have sufficient Linux knowledge to properly set up security for their system such as adopting a [mandatory access control](https://en.wikipedia.org/wiki/Mandatory_access_control) system, setting up [kernel module](https://en.wikipedia.org/wiki/Loadable_kernel_module#Security) blacklists, hardening boot parameters, manipulating [sysctl](https://en.wikipedia.org/wiki/Sysctl) parameters and knowing what components they need such as [Polkit](https://en.wikipedia.org/wiki/Polkit).
 
-Any user using the [AUR](https://wiki.archlinux.org/title/Arch_User_Repository), **must** be comfortable in auditing PKGBUILDs that they install from that service. AUR packages are user-produced content and are not vetted in any way and therefore are vulnerable to software supply chain attacks, which has in fact happened [in the past](https://www.bleepingcomputer.com/news/security/malware-found-in-arch-linux-aur-package-repository/). AUR should always be used sparingly and often there is a lot of bad advice on various pages which direct users to blindly use [AUR helpers](https://wiki.archlinux.org/title/AUR_helpers) without sufficient warning.
+Any user using the [AUR](https://wiki.archlinux.org/title/Arch_User_Repository), **must** be comfortable in auditing PKGBUILDs that they install from that service. AUR packages are user-produced content and are not vetted in any way and therefore are vulnerable to software supply chain attacks, which has in fact happened [in the past](https://www.bleepingcomputer.com/news/security/malware-found-in-arch-linux-aur-package-repository/). AUR should always be used sparingly and often there is a lot of bad advice on various pages which direct users to blindly use [AUR helpers](https://wiki.archlinux.org/title/AUR_helpers) without sufficient warning. Similar warnings apply to using third party Personal Package Archives (PPAs) on Debian based distributions or Community Projects (COPR) on Fedora.
 
-For advanced users, we only recommend Arch Linux, not any of its derivatives. We recommend against these two Arch derivatives:
+For advanced users, we only recommend Arch Linux, not any of its derivatives. We recommend against these two Arch derivatives specifically:
 
  * **Manjaro**: This distribution holds packages back for 2 weeks to make sure that their own changes don't break, not to make sure that upstream is stable. When AUR packages are used, they are often built against the latest [libraries](https://en.wikipedia.org/wiki/Library_(computing)) from Arch's repositories.
  * **Garuda**: They use [Chaotic-AUR](https://aur.chaotic.cx/) which automatically and blindly compiles packages from the AUR. There is no verification process to make sure that the AUR packages don't suffer from supply chain attacks.
@@ -102,7 +102,7 @@ For advanced users, we only recommend Arch Linux, not any of its derivatives. We
 ### Linux-libre kernel and "Libre" distributions
 We strongly recommend **against** using the Linux-libre kernel, since it [removes security mitigations](https://www.phoronix.com/scan.php?page=news_item&px=GNU-Linux-Libre-5.7-Released) and [surpresses kernel warnings about vulnerable microcode](https://news.ycombinator.com/item?id=29674846) for ideological reasons.
 
-If you are using a "Libre" distribution like [GUIX](https://guix.gnu.org/), we highly recommend that you add the [Nonguix](https://gitlab.com/nonguix/nonguix) repository, replace the Linux-libre with the mainline kernel, and install all available microcode and firmware updates.
+If you are using a "Libre" distribution like [Guix](https://guix.gnu.org/), we highly recommend that you add the [Nonguix](https://gitlab.com/nonguix/nonguix) repository, replace the Linux-libre with the mainline kernel, and install all available microcode and firmware updates.
 
 ## Things to consider when installing your Linux distribution
 
