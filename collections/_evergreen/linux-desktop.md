@@ -182,8 +182,9 @@ Arch and Arch-based operating systems often do not come with a mandatory access 
 For advanced users, you can make your own AppArmor profiles, SELinux policies, Bubblewrap profiles, and Seccomp blacklist to have better confinement of applications. This is quite a tedious and complicated task so we won't go into detail about how to do it here, but we do have a few projects that you could use as reference.
 
  * Whonix's [AppArmor Everything](https://github.com/Whonix/apparmor-profile-everything)
- * Krathalan's [AppArmor Profiles](https://github.com/krathalan/apparmor-profiles)
+ * Krathalan's [AppArmor profiles](https://github.com/krathalan/apparmor-profiles)
  * noatsecure's [SELinux templates](https://github.com/noatsecure/hardhat-selinux-templates)
+ * Seirdy's [Bubblewrap scripts](https://sr.ht/~seirdy/bwrap-scripts)
 
 ## Additional hardening
 
