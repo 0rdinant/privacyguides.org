@@ -88,7 +88,7 @@ There is often some confusion about "security-focused" distributions and "pentes
 
 ### Arch-based distributions
 
-Arch based distributions are not recommended for new users, regardless of the distribution. Arch does not have an distribution update mechanism for the underlying software stack. As a result the user of the system must stay aware with current trends and adopt technologies as they supersede older practices.
+Arch based distributions are not recommended for new users, regardless of the distribution. Arch does not have an distribution update mechanism for the underlying software choices. As a result the user of the system must stay aware with current trends and adopt technologies as they supersede older practices.
 
 For a secure system, the user is also expected to have sufficient Linux knowledge to properly set up security for their system such as adopting a [mandatory access control](https://en.wikipedia.org/wiki/Mandatory_access_control) system, setting up [kernel module](https://en.wikipedia.org/wiki/Loadable_kernel_module#Security) blacklists, hardening boot parameters, manipulating [sysctl](https://en.wikipedia.org/wiki/Sysctl) parameters and knowing what components they need such as [Polkit](https://en.wikipedia.org/wiki/Polkit).
 
@@ -100,7 +100,7 @@ For advanced users, we only recommend Arch Linux, not any of its derivatives. We
  * **Garuda**: They use [Chaotic-AUR](https://aur.chaotic.cx/) which automatically and blindly compiles packages from the AUR. There is no verification process to make sure that the AUR packages don't suffer from supply chain attacks.
 
 ### Linux-libre kernel and "Libre" distributions
-We strongly recommend **against** using the Linux-libre kernel, since it [removes security mitigations](https://www.phoronix.com/scan.php?page=news_item&px=GNU-Linux-Libre-5.7-Released) and [surpresses kernel warnings about vulnerable microcode](https://news.ycombinator.com/item?id=29674846) for ideological reasons.
+We strongly recommend **against** using the Linux-libre kernel, since it [removes security mitigations](https://www.phoronix.com/scan.php?page=news_item&px=GNU-Linux-Libre-5.7-Released) and [surpresses kernel warnings](https://news.ycombinator.com/item?id=29674846) about vulnerable microcode for ideological reasons.
 
 If you are using a "Libre" distribution like [Guix](https://guix.gnu.org/), we highly recommend that you add the [Nonguix](https://gitlab.com/nonguix/nonguix) repository, replace the Linux-libre with the mainline kernel, and install all available microcode and firmware updates.
 
