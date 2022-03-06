@@ -104,17 +104,21 @@ We strongly recommend **against** using the Linux-libre kernel, since it [remove
 
 If you are using a "Libre" distribution like [Guix](https://guix.gnu.org/), we highly recommend that you add the [Nonguix](https://gitlab.com/nonguix/nonguix) repository, replace the Linux-libre with the mainline kernel, and install all available microcode and firmware updates.
 
-## Things to consider when installing your Linux distribution
+## General Recommendations
 
-##### Drive Encryption
-Unlike Bitlocker on Windows and FileVault on macOS, LUKS encryption on Linux is very problematic to set up after a system has been installed. We recommend that you enable drive encryption during the installation process of any Linux distribution.
+### Drive Encryption
 
-##### Swap
-Consider using [ZRAM](https://wiki.archlinux.org/title/Swap#zram-generator) or [encrypted SWAP](https://wiki.archlinux.org/title/Dm-crypt/Swap_encryption) instead of unencrypted swap to avoid potential security issues with sensitive data being pushed to swap space.
+Most Linux distributions have an installer option for enabling [Linux Unified Key Setup (LUKS)](https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup) encryption upon installation.
 
-On Fedora, ZRAM is configured out of the box.
+If this option isn't set at installation time, the user will have to backup their data and re-install, as encryption is applied after [disk partitioning](https://en.wikipedia.org/wiki/Disk_partitioning) but before [file systems](https://en.wikipedia.org/wiki/File_system) are [formatted](https://en.wikipedia.org/wiki/Disk_formatting).
 
-##### Desktop environment/Window managers
+### Swap
+
+Consider using [ZRAM](https://wiki.archlinux.org/title/Swap#zram-generator) or [encrypted SWAP](https://wiki.archlinux.org/title/Dm-crypt/Swap_encryption) instead of unencrypted swap to avoid potential security issues with sensitive data being pushed to [swap space](https://en.wikipedia.org/wiki/Memory_paging).
+
+Fedora based distributions [use ZRAM](https://fedoraproject.org/wiki/Changes/SwapOnZRAM), by default.
+
+### Desktop environment/Window managers
 Along with your choice of a distribution, your choice of a desktop environment or window manager is integral to your Linux experience. However, there are a few things you should consider in regard to security and privacy.
 
 On Linux, the [Xorg](https://www.x.org/wiki/) display server is extremely problematic. It was never designed with access control in mind, and all Xorg windows can access all of the other Xorg windows. Effectively, this allows any app to keylog and record the user's screen without any permission.
@@ -123,24 +127,24 @@ Nested X11 solutions like Xpra and Xephr can sandbox Xorg windows, but they come
 
 [Wayland](https://wayland.freedesktop.org/) solves this problem by isolating each window and requring apps to request permission for screen recording. Thus, we recommend using desktop environments/window managers that works with Wayland. As of now, the list of desktop environments/window managers that support Wayland includes [GNOME](https://www.gnome.org), [KDE](https://kde.org), and [Sway](https://swaywm.org).
 
-##### Proprietary firmware/microcode updates
+### Proprietary firmware/microcode updates
 On libre or DIY distributions, the proprietary microcode updates often do not come installed by default. We **highly recommend** that you install the microcode updates, as your CPU is already running the proprietary microcode anyways. Your choices boil down to using outdated microcode with known security vulnerabilities or updated microcode with the fixes for those vulnerabilities, and there is no reason to choose the former.
 
 If you are using Fedora or openSUSE, you do not have to worry about installing the microcode updates, as they are already installed by default.
 
 ## Privacy tweaks
 
-##### Mac address randomization
+### Mac address randomization
 
 If you are using Network Manager (the default on Fedora, openSUSE, etc), follow [this guide](https://fedoramagazine.org/randomize-mac-address-nm/) on how to enable randomized mac addresses. We recommend changing the setting to `random` as opposed to `stable` like in the article.
 
 If you are using systemd-networkd, Wicked or another network managing solution, refer to the project's own documentation on how to set this up.
 
-##### Other identifiers
+### Other identifiers
 
 Consider following section [10.1](https://madaidans-insecurities.github.io/guides/linux-hardening.html#hostnames), [10.2](https://madaidans-insecurities.github.io/guides/linux-hardening.html#timezones-locales-keymaps), and [10.3](https://madaidans-insecurities.github.io/guides/linux-hardening.html#machine-id) on Madaidan's [hardening guide](https://madaians-insecurities.github.io/guides/linux-hardening.html#identifiers).
 
-##### System counting
+### System counting
 
 Fedora has fairly interesting [mechanism](https://fedoraproject.org/wiki/Changes/DNF_Better_Counting) which does not involve using unique ID's to count its users. According to their man pages, it appears to be off by default for DNF based systems right now. However, if you are uncomfortable with this, we recommend adding `countme=false` to `/etc/dnf/dnf.conf` just in case it is enabld in the future. On rpm-ostree based systems, follow [this guide](https://fedoramagazine.org/getting-better-at-counting-rpm-ostree-based-systems/) to disable system counting.
 
@@ -148,10 +152,10 @@ openSUSE uses a unique ID system to track the number of installations by default
 
 ## Application confinement
 
-##### Sandboxing
+### Sandboxing
 On Linux, app sandboxing and access control are extremely lacking compared to macOS and ChromeOS. User applications installed via traditional package managers typically have no confinement whatsoever. We will discuss a few common sandboxing methods below:
 
-###### **1. Flatpak**
+#### **1. Flatpak**
 [Flatpak](https://flatpak.org/) first and foremost is a universal package manager for Linux. Its primary function so to be a package format which can be used in most Linux distributions. However, it does come with the benefit of giving the user some form of permission control.
 
 It should be noted that Flatpak's sandbox is quite weak, as laid out in [this article](https://madaidans-insecurities.github.io/linux.html#flatpak).
@@ -160,16 +164,16 @@ The problem with Flatpak's lax high level permissions could be mitigated by usin
 
 However, problems like hard-coded access to some kernel interfaces like `/sys` and `/proc` and a weak seccomp filter still remain and cannot be solved by the user.
 
-###### **2. Firejail**
+#### **2. Firejail**
 
 Firejail is another common sandboxing technique. However, it is a giant SUID binary and has a large attack surface. In short, Firejail makes the system safer from processes that are confined by it, but less safe from processes running outside of it. In general, the usage of Firejail is not recommended. More information on this can be found in Madaidan's [article](https://madaidans-insecurities.github.io/linux.html#firejail).
 
-##### gVisor
+### gVisor
 Most container based solutions are not the ideal approach for app sandboxing, as they typically share the same kernel as the host for performance reasons. Vulnerabilities in the host's kernel could lead to container breakouts and sandbox bypasses.
 
 If you are using Docker, it is highly recommended that you use the [gVisor](https://gvisor.dev) runtime which implements a pseudo kernel for each application container and limits their direct access to the host's kernel.
 
-##### Mandatory Access Control
+### Mandatory Access Control
 Mandatory access control systems on Linux Desktop are largely ineffective policies/profiles; however, it is still worth it to keep them enabled.
 
 On Fedora, SELinux comes preconfigured with targetted policies and will confine system daemons out of the box. We recommend that you never turn off SELinux or put it into permissive mode on Fedora.
@@ -178,7 +182,7 @@ On openSUSE, the user has a choice of AppArmor or SELinux during the installatio
 
 Arch and Arch-based operating systems often do not come with a mandatory access control system out of the box. We highly recommend that you follow the [Arch Wiki](https://wiki.archlinux.org/title/AppArmor) to set up AppArmor.
 
-##### Making your own policies/profiles
+### Making your own policies/profiles
 For advanced users, you can make your own AppArmor profiles, SELinux policies, Bubblewrap profiles, and Seccomp blacklist to have better confinement of applications. This is quite a tedious and complicated task so we won't go into detail about how to do it here, but we do have a few projects that you could use as reference.
 
  * Whonix's [AppArmor Everything](https://github.com/Whonix/apparmor-profile-everything)
@@ -186,9 +190,9 @@ For advanced users, you can make your own AppArmor profiles, SELinux policies, B
  * noatsecure's [SELinux templates](https://github.com/noatsecure/hardhat-selinux-templates)
  * Seirdy's [Bubblewrap scripts](https://sr.ht/~seirdy/bwrap-scripts)
 
-## Additional hardening
+## Advanced Hardenening options
 
-##### Firewalls
+### Firewalls
 You should have an inbound Firewall to block connections to your computer at all times. Consider Red Hat's [documentation](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/using-and-configuring-firewalld_configuring-and-managing-networking) on how to setup Firewalld or Ubuntu's [documentation](https://help.ubuntu.com/community/UFW) on how to setup UFW.
 
 Fedora comes with Firewalld by default; however, their rules are very permissive by default. Consider closing port 1000-65535 with both TCP and UDP after the operating system installation. You should also remove the whitelist for `smb-client` and `mdns` services if you do not use them.
@@ -201,46 +205,46 @@ If you are using Flatpak packages, you can revoke their network socket access us
 
 If you are using non-classic Snap packages on a system with proper snap confinement support (with both AppArmor and CGroupsv1 present), you can use the Snap Store to revoke network permission as well. This is also not bypassable.
 
-##### Kernel hardening
+### Kernel hardening
 Consider following section [2.2](https://madaidans-insecurities.github.io/guides/linux-hardening.html#sysctl), [2.3](https://madaidans-insecurities.github.io/guides/linux-hardening.html#boot-parameters), and [2.5](https://madaidans-insecurities.github.io/guides/linux-hardening.html#kernel-attack-surface-reduction) on Madaidan's [hardening guide](https://madaidans-insecurities.github.io/guides/linux-hardening.html#identifiers) for sysctl and boot parameters hardening and kernel attack surface reduction.
 
 Note that setting `kernel.unprivileged_userns_clone=0` will stop Flatpak, Podman, Docker, and LXC containers from working. Do not set this flag if you are using those technologies.
 
-##### Disabling SMT
+### Disabling SMT
 SMT has been the cause of numerous hardware vulnerabilities, and subsequent patches for those vulnerabilities often come with performance penalties that negate most of the performance gain given by SMT. If you followed the "kernel hardening" section above, some kernel parameters already disable SMT. However, if you are not following it, or if the option is available to you, we recommend that you disable it in your firmware as well.
 
-##### Linux-Hardened
+### Linux-Hardened
 Certain distributions like Arch Linux comes with linux-hardened, a kernel package with hardening patches and more security-conscious defaults.
 
 Linux-Hardened comes with `kernel.unprivileged_userns_clone=0` by default. If you are using Flatpak, Podman, Docker, or LXC containers or other technologies that relies on unpriviledged user namespaces, consider setting `kernel.unprivileged_userns_clone=1`.
 
-##### GRSecurity
+### GRSecurity
 GRSecurity is a set of kernel patches that substantially increase security in the Linux kernel. Unfortunately, it effectively closed off in 2017. If you have access to the latest GRSecurity patches, it is highly recommended that you use them.
 
-##### Hardened memory allocator
+### Hardened memory allocator
 The [hardened memory allocator](https://github.com/GrapheneOS/hardened_malloc) from [GrapheneOS](https://grapheneos.org) can be used on Linux distributions. It is available by default on Whonix and is available as an [AUR package](https://wiki.archlinux.org/title/Security#Hardened_malloc) on Arch based distributions. If you are using the AUR package, consider setting up `LD_PRELOAD` as described in the [Arch Wiki](https://wiki.archlinux.org/title/Security#Hardened_malloc).
 
-##### Umask
+### Umask
 If you are not using openSUSE, consider changing the default umask for both regular users and root to 077.
 
 Changing umask to 077 tends to break snapper on openSUSE and is not recommended.
 
-##### Mountpoint hardening
+### Mountpoint hardening
 Consider adding `nodev`, `noexec`, and `nosuid` to mountpoints which do not need them. Typically, these could be applied to `/boot`, `/boot/efi`, `/home`, `/root`, and `/var`.
 
 If you use [Toolbox](https://docs.fedoraproject.org/en-US/fedora-silverblue/toolbox/), `/var/log/journal` must not have any of those options.
 
 If you are on Arch Linux, do not apply `noexec` to `/var/tmp`.
 
-##### PAM
+### PAM
 Consider following section [14](https://madaidans-insecurities.github.io/guides/linux-hardening.html#pam) on [Madaidan's hardening guide](https://madaidans-insecurities.github.io/guides/linux-hardening.html#pam).
 
 On systems where pam_faillock is not available, consider using [pam_tally2](https://access.redhat.com/solutions/37687) instead.
 
-##### USBGuard
+### USBGuard
 Consider following the [Arch Wiki](https://wiki.archlinux.org/title/USBGuard) to set up USBGuard.
 
-##### Secure Boot
+### Secure Boot
 Consider following section [21](https://madaidans-insecurities.github.io/guides/linux-hardening.html#physical-security) on Madaidan's [hardening guide](https://madaians-insecurities.github.io/guides/linux-hardening.html#identifiers).
 
 By default, UEFI secure boot on Linux distributions is rather ineffective. Besides the problems mentioned in Madaidan's guide, only the chainloader (shim), the boot loader (GRUB), and the kernel are verified. The initramfs is often left unverified, unencrypted, and open up the window for an [evil maid](https://en.wikipedia.org/wiki/Evil_maid_attack) attack.
