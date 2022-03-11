@@ -122,6 +122,8 @@ We recommend using a desktop environment that supports the [Wayland](https://en.
 
 Fortunately common environments such as [GNOME](https://www.gnome.org), [KDE](https://kde.org) and the window manager [Sway](https://swaywm.org) have support for Wayland. Some distributions like Fedora and Tumbleweed use it by default. Likely other distributions will default to Wayland as well as X11 is in [hard maitenance mode](https://www.phoronix.com/scan.php?page=news_item&px=X.Org-Maintenance-Mode-Quickly). If you're using one of those environments it is as easy as selecting the "Wayland" session at the desktop display manager ([GDM](https://en.wikipedia.org/wiki/GNOME_Display_Manager), [KDM](https://en.wikipedia.org/wiki/KDE_Display_Manager)) etc.
 
+We recommend **against** using desktop environments or window managers that do not have Wayland support such as Cinnamon (default on Linux Mint), Pantheon (default on Elemetary OS) MATE, XFCE and i3.
+
 ### Proprietary firmware/microcode updates
 On libre or DIY distributions, the proprietary microcode updates often do not come installed by default. We **highly recommend** that you install the microcode updates, as your CPU is already running the proprietary microcode anyways. Your choices boil down to using outdated microcode with known security vulnerabilities or updated microcode with the fixes for those vulnerabilities, and there is no reason to choose the former.
 
