@@ -92,7 +92,7 @@ Arch based distributions are not recommended for new users, regardless of the di
 
 For a secure system, the user is also expected to have sufficient Linux knowledge to properly set up security for their system such as adopting a [mandatory access control](https://en.wikipedia.org/wiki/Mandatory_access_control) system, setting up [kernel module](https://en.wikipedia.org/wiki/Loadable_kernel_module#Security) blacklists, hardening boot parameters, manipulating [sysctl](https://en.wikipedia.org/wiki/Sysctl) parameters and knowing what components they need such as [Polkit](https://en.wikipedia.org/wiki/Polkit).
 
-Any user using the [AUR](https://wiki.archlinux.org/title/Arch_User_Repository), **must** be comfortable in auditing PKGBUILDs that they install from that service. AUR packages are user-produced content and are not vetted in any way and therefore are vulnerable to software supply chain attacks, which has in fact happened [in the past](https://www.bleepingcomputer.com/news/security/malware-found-in-arch-linux-aur-package-repository/). AUR should always be used sparingly and often there is a lot of bad advice on various pages which direct users to blindly use [AUR helpers](https://wiki.archlinux.org/title/AUR_helpers) without sufficient warning. Similar warnings apply to using third party Personal Package Archives (PPAs) on Debian based distributions or Community Projects (COPR) on Fedora.
+Any user using the [Arch User Repository (AUR)](https://wiki.archlinux.org/title/Arch_User_Repository), **must** be comfortable in auditing PKGBUILDs that they install from that service. AUR packages are user-produced content and are not vetted in any way and therefore are vulnerable to software supply chain attacks, which has in fact happened [in the past](https://www.bleepingcomputer.com/news/security/malware-found-in-arch-linux-aur-package-repository/). AUR should always be used sparingly and often there is a lot of bad advice on various pages which direct users to blindly use [AUR helpers](https://wiki.archlinux.org/title/AUR_helpers) without sufficient warning. Similar warnings apply to using third party Personal Package Archives (PPAs) on Debian based distributions or Community Projects (COPR) on Fedora.
 
 For advanced users, we only recommend Arch Linux, not any of its derivatives. We recommend against these two Arch derivatives specifically:
 
@@ -101,8 +101,6 @@ For advanced users, we only recommend Arch Linux, not any of its derivatives. We
 
 ### Linux-libre kernel and "Libre" distributions
 We strongly recommend **against** using the Linux-libre kernel, since it [removes security mitigations](https://www.phoronix.com/scan.php?page=news_item&px=GNU-Linux-Libre-5.7-Released) and [surpresses kernel warnings](https://news.ycombinator.com/item?id=29674846) about vulnerable microcode for ideological reasons.
-
-If you are using a "Libre" distribution like [Guix](https://guix.gnu.org/), we highly recommend that you add the [Nonguix](https://gitlab.com/nonguix/nonguix) repository, replace the Linux-libre with the mainline kernel, and install all available microcode and firmware updates.
 
 ## General Recommendations
 
@@ -118,14 +116,11 @@ Consider using [ZRAM](https://wiki.archlinux.org/title/Swap#zram-generator) or [
 
 Fedora based distributions [use ZRAM](https://fedoraproject.org/wiki/Changes/SwapOnZRAM), by default.
 
-### Desktop environment/Window managers
-Along with your choice of a distribution, your choice of a desktop environment or window manager is integral to your Linux experience. However, there are a few things you should consider in regard to security and privacy.
+### Wayland
 
-On Linux, the [Xorg](https://www.x.org/wiki/) display server is extremely problematic. It was never designed with access control in mind, and all Xorg windows can access all of the other Xorg windows. Effectively, this allows any app to keylog and record the user's screen without any permission.
+We recommend using a desktop environment that supports the [Wayland](https://en.wikipedia.org/wiki/Wayland_(display_server_protocol)) display protocol as it developed with security [in mind](https://lwn.net/Articles/589147/).
 
-Nested X11 solutions like Xpra and Xephr can sandbox Xorg windows, but they come with a great performance cost and a lot of inconveniences.
-
-[Wayland](https://wayland.freedesktop.org/) solves this problem by isolating each window and requring apps to request permission for screen recording. Thus, we recommend using desktop environments/window managers that works with Wayland. As of now, the list of desktop environments/window managers that support Wayland includes [GNOME](https://www.gnome.org), [KDE](https://kde.org), and [Sway](https://swaywm.org).
+Fortunately most environments [GNOME](https://www.gnome.org) [KDE](https://kde.org), and [Sway](https://swaywm.org) support it and have for some time as the predecessor is in [hard maitenance mode](https://www.phoronix.com/scan.php?page=news_item&px=X.Org-Maintenance-Mode-Quickly). So if you're using one of those environments, it is as easy as selecting the "Wayland" session at the desktop display manager, eg. [GDM](https://en.wikipedia.org/wiki/GNOME_Display_Manager), [KDM](https://en.wikipedia.org/wiki/KDE_Display_Manager), etc.
 
 ### Proprietary firmware/microcode updates
 On libre or DIY distributions, the proprietary microcode updates often do not come installed by default. We **highly recommend** that you install the microcode updates, as your CPU is already running the proprietary microcode anyways. Your choices boil down to using outdated microcode with known security vulnerabilities or updated microcode with the fixes for those vulnerabilities, and there is no reason to choose the former.
