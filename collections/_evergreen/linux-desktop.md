@@ -120,7 +120,9 @@ Fedora based distributions [use ZRAM](https://fedoraproject.org/wiki/Changes/Swa
 
 We recommend using a desktop environment that supports the [Wayland](https://en.wikipedia.org/wiki/Wayland_(display_server_protocol)) display protocol as it developed with security [in mind](https://lwn.net/Articles/589147/).
 
-Fortunately most environments [GNOME](https://www.gnome.org) [KDE](https://kde.org), and [Sway](https://swaywm.org) support it and have for some time as the predecessor is in [hard maitenance mode](https://www.phoronix.com/scan.php?page=news_item&px=X.Org-Maintenance-Mode-Quickly). So if you're using one of those environments, it is as easy as selecting the "Wayland" session at the desktop display manager, eg. [GDM](https://en.wikipedia.org/wiki/GNOME_Display_Manager), [KDM](https://en.wikipedia.org/wiki/KDE_Display_Manager), etc.
+Fortunately most of the common environment ([GNOME](https://www.gnome.org) [KDE](https://kde.org), and [Sway](https://swaywm.org)) support it and have for some time. The predecessor (X11) is in [hard maitenance mode](https://www.phoronix.com/scan.php?page=news_item&px=X.Org-Maintenance-Mode-Quickly).
+
+If you're using one of those environments it is as easy as selecting the "Wayland" session at the desktop display manager ([GDM](https://en.wikipedia.org/wiki/GNOME_Display_Manager), [KDM](https://en.wikipedia.org/wiki/KDE_Display_Manager)) etc.
 
 ### Proprietary firmware/microcode updates
 On libre or DIY distributions, the proprietary microcode updates often do not come installed by default. We **highly recommend** that you install the microcode updates, as your CPU is already running the proprietary microcode anyways. Your choices boil down to using outdated microcode with known security vulnerabilities or updated microcode with the fixes for those vulnerabilities, and there is no reason to choose the former.
